@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Copa do Mundo 2026 — Painel</title>
+  <link rel="stylesheet" href="styles.css?v=16">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚽</text></svg>">
+</head>
+<body>
+  <div class="shell">
+    <aside id="ads-sidebar" class="ads-sidebar">
+      <div class="ads-head">
+        <b>🎓 Cursos</b><span>Inscrições abertas · ALFAMA</span>
+      </div>
+      <div id="ads-list" class="ads-list"></div>
+    </aside>
+
+    <div class="main-col">
+      <div class="brand-bar">
+        <div class="brand">
+          <div class="brand-logo" id="brand-logo"></div>
+          <div class="brand-text">
+            <div class="brand-name">VALOR</div>
+            <div class="brand-tag">Centro de Soluções em Negócios Imobiliários</div>
+          </div>
+          <div class="brand-creci">CRECI PJ 251</div>
+        </div>
+      </div>
+
+      <header>
+        <div class="header-actions">
+          <button id="news-toggle" class="icon-btn" title="Notícias do Brasil">📰</button>
+          <button id="theme-toggle" class="icon-btn" title="Alternar tema">☀️</button>
+        </div>
+        <div class="trophy">🏆</div>
+        <h1>COPA DO MUNDO <span class="yr">2026</span></h1>
+        <div class="subtitle" id="hosts">Estados Unidos · México · Canadá</div>
+        <div class="update" id="update-badge">Atualizado</div>
+        <div><button id="update-all-btn" class="update-all">🔄 Atualizar tudo</button></div>
+      </header>
+
+      <nav class="tabs">
+        <button data-tab="results" class="active">⚽ Resultados</button>
+        <button data-tab="groups">📊 Grupos</button>
+        <button data-tab="calendar">🗓️ Calendário</button>
+        <button data-tab="simulator">🔮 Simulador</button>
+        <button data-tab="probabilities">🎯 Probabilidades</button>
+        <button data-tab="knockout">🏆 Mata-mata</button>
+        <button data-tab="scorers">👟 Artilharia</button>
+      </nav>
+
+      <main>
+        <section id="view-results"     class="view active"></section>
+        <section id="view-groups"      class="view"></section>
+        <section id="view-calendar"    class="view"></section>
+        <section id="view-simulator"   class="view"></section>
+        <section id="view-probabilities" class="view"></section>
+        <section id="view-knockout"    class="view"></section>
+        <section id="view-scorers"     class="view"></section>
+      </main>
+
+      <footer id="site-footer">
+        <b>VALOR</b> — Centro de Soluções em Negócios Imobiliários · CRECI PJ 251<br>
+        ⚽ Painel da Copa 2026 · dados atualizados via agente de IA
+      </footer>
+    </div><!-- /.main-col -->
+  </div><!-- /.shell -->
+
+  <div id="news-backdrop" class="news-backdrop"></div>
+  <aside id="news-drawer" class="news-drawer">
+    <div class="news-head">
+      <div><b>📰 Notícias do Brasil</b><span>🇧🇷 Seleção · Copa 2026</span></div>
+      <button id="news-close" class="icon-btn" title="Fechar">✕</button>
+    </div>
+    <div id="news-list" class="news-list"></div>
+  </aside>
+
+  <script src="config.js?v=16"></script>
+  <script src="data.js?v=16"></script>
+  <script src="app.js?v=16"></script>
+</body>
+</html>
