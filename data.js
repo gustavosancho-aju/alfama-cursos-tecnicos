@@ -207,4 +207,6 @@ const RESULTS = [
   { home: "NED", away: "JPN", hs: 2, as: 2 },
   { home: "CIV", away: "ECU", hs: 1, as: 0 },
   { home: "SWE", away: "TUN", hs: 5, as: 1 },
+  { home: "ESP", away: "CPV", hs: 0, as: 0 },
+  { home: "BEL", away: "EGY", hs: 1, as: 1 },
 ];
