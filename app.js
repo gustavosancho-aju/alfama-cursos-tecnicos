@@ -223,18 +223,87 @@ const fmtDate = d => {
 const teamChip = (code, side = "") =>
   `<span class="team ${side}">${flagImg(code, 24)}<span>${TEAM_BY_CODE[code].name}</span></span>`;
 
+const CAL_WD = ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"];
+
+/* Monta a grade mensal de dias clicáveis a partir de um mapa {data:[jogos]}.
+   onclickFn = nome da função global chamada ao clicar (recebe a data YYYY-MM-DD). */
+function monthsGridHTML(byDate, selected, onclickFn, today) {
+  const dates = Object.keys(byDate).sort();
+  const months = [...new Set(dates.map(d => d.slice(0, 7)))].sort();
+  let html = `<div class="cal-wrap">`;
+  for (const ym of months) {
+    const [y, m] = ym.split("-").map(Number);
+    const first = new Date(y, m - 1, 1);
+    const monthName = first.toLocaleDateString("pt-BR", { month: "long", year: "numeric" });
+    const daysInMonth = new Date(y, m, 0).getDate();
+    const lead = first.getDay(); // 0=dom
+    html += `<div class="cal-month">
+      <div class="cal-month-title">${monthName.charAt(0).toUpperCase() + monthName.slice(1)}</div>
+      <div class="cal-grid">
+        ${CAL_WD.map(w => `<div class="cal-wd">${w}</div>`).join("")}`;
+    for (let i = 0; i < lead; i++) html += `<div class="cal-cell blank"></div>`;
+    for (let day = 1; day <= daysInMonth; day++) {
+      const ds = `${ym}-${String(day).padStart(2, "0")}`;
+      const games = byDate[ds];
+      if (!games) { html += `<div class="cal-cell empty">${day}</div>`; continue; }
+      const cls = ["cal-cell", "has-games"];
+      if (ds === selected) cls.push("sel");
+      if (ds === today) cls.push("today");
+      html += `<button class="${cls.join(" ")}" onclick="${onclickFn}('${ds}')">
+        <span class="cal-d">${day}</span><span class="cal-dot">${games.length}</span>
+      </button>`;
+    }
+    html += `</div></div>`;
+  }
+  return html + `</div>`;
+}
+
 /* ---- 1. RESULTADOS ---- */
+let resSelectedDate = null;
+let resShowFull = false;
+function setResDate(d) { resSelectedDate = d; resShowFull = false; renderResults(); }
+function toggleResFull() { resShowFull = !resShowFull; renderResults(); }
+
 function renderResults() {
   const played = ALL_FIXTURES.filter(f => f.played).sort((a, b) => (a.gmt || a.date).localeCompare(b.gmt || b.date));
   const el = $("#view-results");
   if (!played.length) { el.innerHTML = `<div class="empty">Nenhum jogo realizado ainda. Peça ao agente para buscar os resultados! ⚽</div>`; return; }
-  let html = `<h2 class="section-title">Resultados dos jogos</h2><div class="panel">`;
-  let lastDate = "";
-  for (const fx of played) {
-    if (fx.brtDate !== lastDate) { html += `<div class="matchday-label">📅 ${fmtDate(fx.brtDate)}</div>`; lastDate = fx.brtDate; }
-    html += matchCardHTML(fx, { hs: fx.hs, as: fx.as });
+
+  const byDate = {};
+  for (const fx of played) (byDate[fx.brtDate] = byDate[fx.brtDate] || []).push(fx);
+  const dates = Object.keys(byDate).sort();
+
+  let html = `<h2 class="section-title">Resultados dos jogos</h2>
+    <p class="sim-note">Clique num dia para ver os resultados — ou use a <b>Lista completa</b>.</p>
+    <div class="prob-controls">
+      <button class="${resShowFull ? "" : "ghost"}" onclick="toggleResFull()">📋 Lista completa</button>
+    </div>`;
+
+  /* ----- modo LISTA COMPLETA ----- */
+  if (resShowFull) {
+    html += `<div class="panel">`;
+    let lastDate = "";
+    for (const fx of played) {
+      if (fx.brtDate !== lastDate) { html += `<div class="cal-day-head">📅 ${fmtDate(fx.brtDate)}</div>`; lastDate = fx.brtDate; }
+      html += matchCardHTML(fx, { hs: fx.hs, as: fx.as });
+    }
+    html += `</div>`;
+    el.innerHTML = html; return;
   }
-  html += `</div>`;
+
+  /* ----- modo CALENDÁRIO (grade) ----- */
+  // padrão: dia mais recente com resultado
+  if (!resSelectedDate || !byDate[resSelectedDate]) resSelectedDate = dates[dates.length - 1];
+  const today = new Date().toLocaleDateString("en-CA", { timeZone: "America/Sao_Paulo" });
+
+  html += monthsGridHTML(byDate, resSelectedDate, "setResDate", today);
+
+  const dayGames = byDate[resSelectedDate] || [];
+  html += `<div class="cal-day-selected">
+    <div class="cal-day-head">📅 ${fmtDate(resSelectedDate)} · ${dayGames.length} jogo${dayGames.length > 1 ? "s" : ""}</div>
+    <div class="panel">`;
+  for (const fx of dayGames) html += matchCardHTML(fx, { hs: fx.hs, as: fx.as });
+  html += `</div></div>`;
   el.innerHTML = html;
 }
 
@@ -287,7 +356,6 @@ function renderGroups() {
 let calendarFilter = "ALL";
 let calSelectedDate = null;      // dia selecionado (YYYY-MM-DD, fuso Brasília)
 let calShowFull = false;         // modo "Lista completa"
-const CAL_WD = ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"];
 
 function setCalFilter(v) { calendarFilter = v; calSelectedDate = null; renderCalendar(); }
 function setCalDate(d) { calSelectedDate = d; calShowFull = false; renderCalendar(); }
@@ -350,35 +418,7 @@ function renderCalendar() {
       : (gameDates.find(d => d >= today) || gameDates[gameDates.length - 1]);
   }
 
-  // meses envolvidos (YYYY-MM)
-  const months = [...new Set(gameDates.map(d => d.slice(0, 7)))].sort();
-  html += `<div class="cal-wrap">`;
-  for (const ym of months) {
-    const [y, m] = ym.split("-").map(Number);
-    const first = new Date(y, m - 1, 1);
-    const monthName = first.toLocaleDateString("pt-BR", { month: "long", year: "numeric" });
-    const daysInMonth = new Date(y, m, 0).getDate();
-    const lead = first.getDay(); // 0=dom
-
-    html += `<div class="cal-month">
-      <div class="cal-month-title">${monthName.charAt(0).toUpperCase() + monthName.slice(1)}</div>
-      <div class="cal-grid">
-        ${CAL_WD.map(w => `<div class="cal-wd">${w}</div>`).join("")}`;
-    for (let i = 0; i < lead; i++) html += `<div class="cal-cell blank"></div>`;
-    for (let day = 1; day <= daysInMonth; day++) {
-      const ds = `${ym}-${String(day).padStart(2, "0")}`;
-      const games = byDate[ds];
-      if (!games) { html += `<div class="cal-cell empty">${day}</div>`; continue; }
-      const cls = ["cal-cell", "has-games"];
-      if (ds === calSelectedDate) cls.push("sel");
-      if (ds === today) cls.push("today");
-      html += `<button class="${cls.join(" ")}" onclick="setCalDate('${ds}')">
-        <span class="cal-d">${day}</span><span class="cal-dot">${games.length}</span>
-      </button>`;
-    }
-    html += `</div></div>`;
-  }
-  html += `</div>`;
+  html += monthsGridHTML(byDate, calSelectedDate, "setCalDate", today);
 
   // jogos do dia selecionado
   const dayGames = byDate[calSelectedDate] || [];
