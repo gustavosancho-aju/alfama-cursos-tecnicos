@@ -18,7 +18,7 @@ const TOURNAMENT = {
   hosts: "Estados Unidos · México · Canadá",
   start: "2026-06-11",
   end: "2026-07-19",
-  lastUpdate: "2026-06-16",
+  lastUpdate: "2026-06-17",
 };
 
 /* rating ≈ pontos do Ranking FIFA (jun/2026) */
@@ -211,4 +211,9 @@ const RESULTS = [
   { home: "BEL", away: "EGY", hs: 1, as: 1 },
   { home: "KSA", away: "URU", hs: 1, as: 1 },
   { home: "IRN", away: "NZL", hs: 2, as: 2 },
+  // Rodada 1 (cont.) — 16/06
+  { home: "FRA", away: "SEN", hs: 3, as: 1 },
+  { home: "IRQ", away: "NOR", hs: 1, as: 4 },
+  { home: "ARG", away: "ALG", hs: 3, as: 0 },
+  { home: "AUT", away: "JOR", hs: 3, as: 1 },
 ];
