@@ -189,6 +189,23 @@ const SCORERS = [
   { name: "Vinícius Júnior",  code: "BRA", goals: 1 },
   { name: "Virgil van Dijk",  code: "NED", goals: 1 },
   { name: "Amad Diallo",      code: "CIV", goals: 1 },
+  // Rodada 1 — Grupos G, H, I, J (15-16/06)
+  { name: "Lionel Messi",     code: "ARG", goals: 3 },
+  { name: "Kylian Mbappé",    code: "FRA", goals: 2 },
+  { name: "Erling Haaland",   code: "NOR", goals: 2 },
+  { name: "Elijah Just",      code: "NZL", goals: 2 },
+  { name: "Bradley Barcola",  code: "FRA", goals: 1 },
+  { name: "Mbaye Niang",      code: "SEN", goals: 1 },
+  { name: "Leo Østigård",     code: "NOR", goals: 1 },
+  { name: "Aymen Hussein",    code: "IRQ", goals: 1 },
+  { name: "Ramin Rezaeian",   code: "IRN", goals: 1 },
+  { name: "Mohammad Mohebbi", code: "IRN", goals: 1 },
+  { name: "Maxi Araújo",      code: "URU", goals: 1 },
+  { name: "Abdulelah Al-Amri", code: "KSA", goals: 1 },
+  { name: "Emam Ashour",      code: "EGY", goals: 1 },
+  { name: "Romano Schmid",    code: "AUT", goals: 1 },
+  { name: "Marko Arnautović", code: "AUT", goals: 1 },
+  { name: "Ali Olwan",        code: "JOR", goals: 1 },
 ];
 
 /* Resultados já realizados.
