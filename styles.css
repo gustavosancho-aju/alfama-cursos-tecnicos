@@ -235,7 +235,8 @@ img.flag {
 }
 
 /* ---------- Tabelas de grupo ---------- */
-.groups-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+.groups-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+@media (max-width: 640px) { .groups-grid { grid-template-columns: 1fr; } }
 .group-card { padding: 0; overflow: hidden; }
 .group-card .group-head {
   background: linear-gradient(135deg, var(--grass) 0%, #14693a 100%);
