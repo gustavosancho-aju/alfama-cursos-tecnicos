@@ -64,11 +64,15 @@ const NEWS = [
     text: "🎓 Torcendo pelo Brasil e investindo no seu futuro! Durante a Copa, a Alfama está com condições especiais de matrícula nos cursos técnicos. Garanta sua vaga.",
   },
   {
-    source: "Central da Copa", handle: "@centralcopa", time: "há 2h", tag: "Análise",
-    text: "🇧🇷 Brasil empata em 1 a 1 com o Marrocos na estreia. Vini Jr. marcou um golaço. Próximo jogo: Brasil x Haiti, sexta (19/06), 21h30 (Brasília).",
+    source: "Central da Copa", handle: "@centralcopa", time: "há 2h", tag: "Histórico",
+    text: "🐐 MESSI NA HISTÓRIA! Hat-trick no 3 a 0 da Argentina sobre a Argélia e o craque IGUALA Klose como maior artilheiro de Copas (16 gols) — o 1º hat-trick dele em Mundiais.",
   },
   {
-    source: "Carlo Ancelotti", handle: "@ancelotti", time: "há 3h", tag: "Coletiva",
-    text: "\"Copa não se ganha no primeiro jogo.\" Ancelotti minimizou o empate e prometeu uma Seleção mais forte e agressiva no próximo duelo.",
+    source: "Agenda Seleção", handle: "@agendaselecao", time: "há 3h", tag: "Próximo jogo",
+    text: "📅 BRASIL x HAITI, sexta (19/06), 21h30 (Brasília), na Filadélfia. Projeção: 83% de vitória brasileira. Chance de embalar no Grupo C após o empate na estreia.",
+  },
+  {
+    source: "Globo Esporte", handle: "@geglobo", time: "há 4h", tag: "Destaque",
+    text: "🇳🇴 Haaland brilha: Noruega volta à Copa após 28 anos e goleia o Iraque por 4 a 1, com 2 gols dele. Mbappé fez 2 no 3 a 1 sobre Senegal e bateu recorde da França.",
   },
 ];
