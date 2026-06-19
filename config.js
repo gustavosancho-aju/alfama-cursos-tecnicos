@@ -72,7 +72,7 @@ const NEWS = [
     text: "📅 BRASIL x HAITI, sexta (19/06), 21h30 (Brasília), na Filadélfia. Projeção: 83% de vitória brasileira. Chance de embalar no Grupo C após o empate na estreia.",
   },
   {
-    source: "Globo Esporte", handle: "@geglobo", time: "há 4h", tag: "Destaque",
-    text: "🇳🇴 Haaland brilha: Noruega volta à Copa após 28 anos e goleia o Iraque por 4 a 1, com 2 gols dele. Mbappé fez 2 no 3 a 1 sobre Senegal e bateu recorde da França.",
+    source: "Premier Watch", handle: "@premierwatch", time: "há 4h", tag: "Destaque",
+    text: "🏴 SHOW DE KANE! Inglaterra 4 a 2 na Croácia no melhor jogo da Copa até aqui (2 de Kane). 1ª rodada completa: CR7 frustrado no 1x1 de Portugal com a estreante RD Congo.",
   },
 ];

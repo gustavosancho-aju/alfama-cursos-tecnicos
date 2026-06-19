@@ -206,6 +206,19 @@ const SCORERS = [
   { name: "Romano Schmid",    code: "AUT", goals: 1 },
   { name: "Marko Arnautović", code: "AUT", goals: 1 },
   { name: "Ali Olwan",        code: "JOR", goals: 1 },
+  // Rodada 1 — Grupos K, L (17/06)
+  { name: "Harry Kane",       code: "ENG", goals: 2 },
+  { name: "Jude Bellingham",  code: "ENG", goals: 1 },
+  { name: "Marcus Rashford",  code: "ENG", goals: 1 },
+  { name: "Martin Baturina",  code: "CRO", goals: 1 },
+  { name: "Petar Musa",       code: "CRO", goals: 1 },
+  { name: "Luis Díaz",        code: "COL", goals: 1 },
+  { name: "Daniel Muñoz",     code: "COL", goals: 1 },
+  { name: "Jáminton Campaz",  code: "COL", goals: 1 },
+  { name: "Abbosbek Fayzullaev", code: "UZB", goals: 1 },
+  { name: "João Neves",       code: "POR", goals: 1 },
+  { name: "Yoane Wissa",      code: "COD", goals: 1 },
+  { name: "Caleb Yirenkyi",   code: "GHA", goals: 1 },
 ];
 
 /* Resultados já realizados.
@@ -233,4 +246,9 @@ const RESULTS = [
   { home: "IRQ", away: "NOR", hs: 1, as: 4 },
   { home: "ARG", away: "ALG", hs: 3, as: 0 },
   { home: "AUT", away: "JOR", hs: 3, as: 1 },
+  // Rodada 1 (cont.) — 17/06
+  { home: "POR", away: "COD", hs: 1, as: 1 },
+  { home: "ENG", away: "CRO", hs: 4, as: 2 },
+  { home: "GHA", away: "PAN", hs: 1, as: 0 },
+  { home: "UZB", away: "COL", hs: 1, as: 3 },
 ];
