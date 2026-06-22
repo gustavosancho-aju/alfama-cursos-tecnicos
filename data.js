@@ -18,7 +18,7 @@ const TOURNAMENT = {
   hosts: "Estados Unidos · México · Canadá",
   start: "2026-06-11",
   end: "2026-07-19",
-  lastUpdate: "2026-06-17",
+  lastUpdate: "2026-06-22",
 };
 
 /* rating ≈ pontos do Ranking FIFA (jun/2026) */
@@ -178,7 +178,7 @@ const SCORERS = [
   { name: "Hwang In-beom",   code: "KOR", goals: 1 },
   { name: "Oh Hyun-gyu",     code: "KOR", goals: 1 },
   { name: "Jovo Lukić",      code: "BIH", goals: 1 },
-  { name: "Cyle Larin",      code: "CAN", goals: 1 },
+  { name: "Cyle Larin",      code: "CAN", goals: 2 },
   { name: "Maurício",        code: "PAR", goals: 1 },
   { name: "Gio Reyna",       code: "USA", goals: 1 },
   { name: "Breel Embolo",    code: "SUI", goals: 1 },
@@ -219,6 +219,16 @@ const SCORERS = [
   { name: "João Neves",       code: "POR", goals: 1 },
   { name: "Yoane Wissa",      code: "COD", goals: 1 },
   { name: "Caleb Yirenkyi",   code: "GHA", goals: 1 },
+  // Rodada 2 (18-19/06)
+  { name: "Michal Sadílek",   code: "CZE", goals: 1 },
+  { name: "Teboho Mokoena",   code: "RSA", goals: 1 },
+  { name: "Johan Manzambi",   code: "SUI", goals: 2 },
+  { name: "Rubén Vargas",     code: "SUI", goals: 1 },
+  { name: "Granit Xhaka",     code: "SUI", goals: 1 },
+  { name: "Ermin Mahmić",     code: "BIH", goals: 1 },
+  { name: "Jonathan David",   code: "CAN", goals: 3 },
+  { name: "Saliba",           code: "CAN", goals: 1 },
+  { name: "Luis Romo",        code: "MEX", goals: 1 },
 ];
 
 /* Resultados já realizados.
@@ -251,4 +261,24 @@ const RESULTS = [
   { home: "ENG", away: "CRO", hs: 4, as: 2 },
   { home: "GHA", away: "PAN", hs: 1, as: 0 },
   { home: "UZB", away: "COL", hs: 1, as: 3 },
+  // Rodada 2 — 18-19/06
+  { home: "CZE", away: "RSA", hs: 1, as: 1 },
+  { home: "SUI", away: "BIH", hs: 4, as: 1 },
+  { home: "CAN", away: "QAT", hs: 6, as: 0 },
+  { home: "MEX", away: "KOR", hs: 1, as: 0 },
+  // Rodada 2 — 19/06
+  { home: "USA", away: "AUS", hs: 2, as: 0 },
+  { home: "SCO", away: "MAR", hs: 0, as: 1 },
+  { home: "BRA", away: "HAI", hs: 3, as: 0 },
+  { home: "TUR", away: "PAR", hs: 0, as: 1 },
+  // Rodada 2 — 20/06
+  { home: "NED", away: "SWE", hs: 5, as: 1 },
+  { home: "GER", away: "CIV", hs: 2, as: 1 },
+  { home: "ECU", away: "CUW", hs: 0, as: 0 },
+  { home: "TUN", away: "JPN", hs: 0, as: 4 },
+  // Rodada 2 — 21/06
+  { home: "ESP", away: "KSA", hs: 4, as: 0 },
+  { home: "BEL", away: "IRN", hs: 0, as: 0 },
+  { home: "URU", away: "CPV", hs: 2, as: 2 },
+  { home: "NZL", away: "EGY", hs: 1, as: 3 },
 ];
