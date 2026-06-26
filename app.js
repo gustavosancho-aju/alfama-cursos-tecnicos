@@ -711,13 +711,21 @@ function autoFill() {
    Força bruta dos jogos restantes; empate conta contra o time (nunca confirma à toa). */
 function confirmedQualified(group) {
   const teams = teamsOf(group).map(t => t.code);
+  const rem = ALL_FIXTURES.filter(f => f.group === group && !f.played);
+
+  // Grupo ENCERRADO: os 2 primeiros da tabela REAL (com saldo e demais critérios) estão confirmados.
+  if (rem.length === 0) {
+    const st = computeStandings(group, { includeSims: false });
+    return new Set(st.slice(0, 2).map(s => s.code));
+  }
+
+  // Grupo em ANDAMENTO: garantia conservadora por pontos (empate conta contra; nunca confirma à toa).
   const base = {}; teams.forEach(c => base[c] = 0);
   for (const f of ALL_FIXTURES.filter(f => f.group === group && f.played)) {
     if (f.hs > f.as) base[f.home] += 3;
     else if (f.hs < f.as) base[f.away] += 3;
     else { base[f.home] += 1; base[f.away] += 1; }
   }
-  const rem = ALL_FIXTURES.filter(f => f.group === group && !f.played);
   const safe = new Set(teams);
   const total = Math.pow(3, rem.length);
   for (let mask = 0; mask < total; mask++) {

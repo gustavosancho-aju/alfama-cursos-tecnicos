@@ -18,7 +18,7 @@ const TOURNAMENT = {
   hosts: "Estados Unidos · México · Canadá",
   start: "2026-06-11",
   end: "2026-07-19",
-  lastUpdate: "2026-06-22",
+  lastUpdate: "2026-06-25",
 };
 
 /* rating ≈ pontos do Ranking FIFA (jun/2026) */
@@ -190,9 +190,9 @@ const SCORERS = [
   { name: "Virgil van Dijk",  code: "NED", goals: 1 },
   { name: "Amad Diallo",      code: "CIV", goals: 1 },
   // Rodada 1 — Grupos G, H, I, J (15-16/06)
-  { name: "Lionel Messi",     code: "ARG", goals: 3 },
-  { name: "Kylian Mbappé",    code: "FRA", goals: 2 },
-  { name: "Erling Haaland",   code: "NOR", goals: 2 },
+  { name: "Lionel Messi",     code: "ARG", goals: 5 },
+  { name: "Kylian Mbappé",    code: "FRA", goals: 3 },
+  { name: "Erling Haaland",   code: "NOR", goals: 4 },
   { name: "Elijah Just",      code: "NZL", goals: 2 },
   { name: "Bradley Barcola",  code: "FRA", goals: 1 },
   { name: "Mbaye Niang",      code: "SEN", goals: 1 },
@@ -213,7 +213,7 @@ const SCORERS = [
   { name: "Martin Baturina",  code: "CRO", goals: 1 },
   { name: "Petar Musa",       code: "CRO", goals: 1 },
   { name: "Luis Díaz",        code: "COL", goals: 1 },
-  { name: "Daniel Muñoz",     code: "COL", goals: 1 },
+  { name: "Daniel Muñoz",     code: "COL", goals: 2 },
   { name: "Jáminton Campaz",  code: "COL", goals: 1 },
   { name: "Abbosbek Fayzullaev", code: "UZB", goals: 1 },
   { name: "João Neves",       code: "POR", goals: 1 },
@@ -252,6 +252,17 @@ const SCORERS = [
   { name: "Mohamed Salah",    code: "EGY", goals: 1 },
   { name: "Trezeguet",        code: "EGY", goals: 1 },
   { name: "Mohamed Surman",   code: "NZL", goals: 1 },
+  // Rodada 2 (22/06)
+  { name: "Marcus Pedersen",  code: "NOR", goals: 1 },
+  { name: "Ismaïla Sarr",     code: "SEN", goals: 2 },
+  { name: "Nizar Al-Rashdan", code: "JOR", goals: 1 },
+  { name: "Nadhir Benbouali", code: "ALG", goals: 1 },
+  { name: "Amine Gouiri",     code: "ALG", goals: 1 },
+  // Rodada 2 (23/06)
+  { name: "Cristiano Ronaldo", code: "POR", goals: 2 },
+  { name: "Nuno Mendes",      code: "POR", goals: 1 },
+  { name: "Rafael Leão",      code: "POR", goals: 1 },
+  { name: "Ante Budimir",     code: "CRO", goals: 1 },
 ];
 
 /* Resultados já realizados.
@@ -304,4 +315,25 @@ const RESULTS = [
   { home: "BEL", away: "IRN", hs: 0, as: 0 },
   { home: "URU", away: "CPV", hs: 2, as: 2 },
   { home: "NZL", away: "EGY", hs: 1, as: 3 },
+  // Rodada 2 — 22/06
+  { home: "ARG", away: "AUT", hs: 2, as: 0 },
+  { home: "FRA", away: "IRQ", hs: 1, as: 0 },
+  { home: "NOR", away: "SEN", hs: 3, as: 2 },
+  { home: "JOR", away: "ALG", hs: 1, as: 2 },
+  // Rodada 2 — 23/06
+  { home: "POR", away: "UZB", hs: 5, as: 0 },
+  { home: "ENG", away: "GHA", hs: 0, as: 0 },
+  { home: "PAN", away: "CRO", hs: 0, as: 1 },
+  { home: "COL", away: "COD", hs: 1, as: 0 },
+  // ---- Rodada 3 (24-25/06) ----
+  { home: "SUI", away: "CAN", hs: 2, as: 1 },
+  { home: "BIH", away: "QAT", hs: 3, as: 1 },
+  { home: "SCO", away: "BRA", hs: 0, as: 3 },
+  { home: "MAR", away: "HAI", hs: 4, as: 2 },
+  { home: "CZE", away: "MEX", hs: 0, as: 3 },
+  { home: "RSA", away: "KOR", hs: 1, as: 0 },
+  { home: "ECU", away: "GER", hs: 2, as: 1 },
+  { home: "CUW", away: "CIV", hs: 0, as: 2 },
+  { home: "JPN", away: "SWE", hs: 1, as: 1 },
+  { home: "TUN", away: "NED", hs: 1, as: 3 },
 ];
