@@ -350,35 +350,50 @@ table.standings .tname { font-weight: 600; }
 
 /* ---------- Mata-mata (bracket com conectores) ---------- */
 .bracket { display: flex; overflow-x: auto; padding: 6px 2px 14px; }
-.round { display: flex; flex-direction: column; min-width: 168px; flex: 1; padding: 0 11px; }
+.bracket.two-sided { justify-content: center; align-items: stretch; }
+.side { display: flex; }
+.round { display: flex; flex-direction: column; justify-content: space-around; min-width: 150px; flex: 1; padding: 0 11px; }
 .round-title { text-align: center; margin-bottom: 10px; }
 .round-title b { font-size: 12px; color: var(--gold-2); text-transform: uppercase; letter-spacing: 1px; }
 .round-title span { display: block; font-size: 10px; color: var(--muted); margin-top: 2px; }
 .matches { flex: 1; display: flex; flex-direction: column; }
 .match { flex: 1; display: flex; align-items: center; position: relative; padding: 5px 0; }
 
-/* conector: saída horizontal (todas as fases menos a final) */
-.round:not(:last-child) .match::after {
-  content: ""; position: absolute; right: -11px; top: 50%; width: 11px; height: 2px;
-  background: var(--line);
+/* ----- conectores LADO ESQUERDO (fluxo p/ a direita) ----- */
+.side.left .round:not(:last-child) .match::after {
+  content: ""; position: absolute; right: -11px; top: 50%; width: 11px; height: 2px; background: var(--line);
 }
-/* conector: linha vertical de entrada (todas menos os 32 avos) */
-.round:not(:first-child) .match::before {
-  content: ""; position: absolute; left: -11px; top: 25%; height: 50%; width: 2px;
-  background: var(--line);
+.side.left .round:not(:first-child) .match::before {
+  content: ""; position: absolute; left: -11px; top: 25%; height: 50%; width: 2px; background: var(--line);
 }
-/* conector: entrada horizontal até a caixa (todas menos os 32 avos) */
-.round:not(:first-child) .game::before {
-  content: ""; position: absolute; left: -11px; top: 50%; width: 11px; height: 2px;
-  background: var(--line);
+.side.left .round:not(:first-child) .game::before {
+  content: ""; position: absolute; left: -11px; top: 50%; width: 11px; height: 2px; background: var(--line);
 }
+
+/* ----- conectores LADO DIREITO (espelhado, fluxo p/ a esquerda) ----- */
+.side.right .round:not(:first-child) .match::after {
+  content: ""; position: absolute; left: -11px; top: 50%; width: 11px; height: 2px; background: var(--line);
+}
+.side.right .round:not(:last-child) .match::before {
+  content: ""; position: absolute; right: -11px; top: 25%; height: 50%; width: 2px; background: var(--line);
+}
+.side.right .round:not(:last-child) .game::before {
+  content: ""; position: absolute; right: -11px; top: 50%; width: 11px; height: 2px; background: var(--line);
+}
+/* células da direita espelhadas: bandeira à direita, texto alinhado à direita */
+.side.right .ko-slot { flex-direction: row-reverse; text-align: right; }
+
+/* ----- centro: final + troféu + campeão ----- */
+.bracket .center { display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 150px; padding: 0 6px; }
+.bracket .center .ko-match { width: 100%; }
+.bracket .center .ko-trophy { font-size: 40px; margin: 14px 0 8px; filter: drop-shadow(0 4px 10px #0005); }
 
 .ko-match { position: relative; width: 100%; background: #00000033; border: 1px solid #ffffff0f; border-radius: 10px; overflow: hidden; }
 
 /* células do bracket (origem e vagas) */
 .ko-slot { display: flex; align-items: center; gap: 6px; padding: 8px 9px; font-size: 12px; font-weight: 600; min-height: 34px; border-bottom: 1px solid #ffffff0d; }
 .ko-slot:last-child { border-bottom: none; }
-.ko-slot img.flag { height: 13px; }
+.ko-slot img.flag { height: 16px; border-radius: 3px; }
 .ko-slot.filled { cursor: grab; }
 .ko-slot.filled:active { cursor: grabbing; }
 .ko-slot.filled:hover { background: #2bb56714; }
