@@ -18,6 +18,17 @@ const FLAG_ISO = {
   POR: "pt", COD: "cd", UZB: "uz", COL: "co", ENG: "gb-eng", CRO: "hr", GHA: "gh", PAN: "pa",
 };
 /* Retorna <img> da bandeira. size: largura em px (usa flagcdn 2x para nitidez). */
+/* Siglas em português para o chaveamento (3 letras) */
+const SIGLA_PT = {
+  MEX: "MEX", RSA: "AFS", KOR: "COR", CZE: "TCH", CAN: "CAN", BIH: "BOS", QAT: "CAT", SUI: "SUI",
+  BRA: "BRA", MAR: "MAR", HAI: "HAI", SCO: "ESC", USA: "EUA", PAR: "PAR", AUS: "AUS", TUR: "TUR",
+  GER: "ALE", CUW: "CUR", CIV: "CDM", ECU: "EQU", NED: "HOL", JPN: "JAP", SWE: "SUE", TUN: "TUN",
+  BEL: "BEL", EGY: "EGI", IRN: "IRA", NZL: "NZL", ESP: "ESP", CPV: "CAB", KSA: "ARA", URU: "URU",
+  FRA: "FRA", SEN: "SEN", IRQ: "IRQ", NOR: "NOR", ARG: "ARG", ALG: "ALG", AUT: "AUT", JOR: "JOR",
+  POR: "POR", COD: "COD", UZB: "UZB", COL: "COL", ENG: "ING", CRO: "CRO", GHA: "GAN", PAN: "PAN",
+};
+const siglaPT = code => SIGLA_PT[code] || code;
+
 function flagImg(code, size = 22) {
   const iso = FLAG_ISO[code];
   const w = size <= 22 ? 40 : 80;
@@ -699,7 +710,7 @@ function autoFill() {
 function koCellSrc(code) {
   if (!code) return `<div class="ko-slot empty"><span class="undecided">—</span></div>`;
   const t = TEAM_BY_CODE[code];
-  return `<div class="ko-slot filled" draggable="true" ondragstart="koDrag(event,'${code}')">${flagImg(code)} <span>${t.name}</span></div>`;
+  return `<div class="ko-slot filled" draggable="true" ondragstart="koDrag(event,'${code}')">${flagImg(code)} <span>${siglaPT(code)}</span></div>`;
 }
 /* célula das fases seguintes: arrastável (se preenchida) e alvo de drop */
 function koCellSlot(m, idx) {
@@ -707,7 +718,7 @@ function koCellSlot(m, idx) {
   const dz = `ondragover="koAllow(event)" ondragenter="this.classList.add('dragover')" ondragleave="this.classList.remove('dragover')" ondrop="this.classList.remove('dragover');koDrop(event,'${key}')"`;
   if (code) {
     const t = TEAM_BY_CODE[code];
-    return `<div class="ko-slot filled" draggable="true" ondragstart="koDrag(event,'${code}')" ${dz}>${flagImg(code)} <span>${t.name}</span></div>`;
+    return `<div class="ko-slot filled" draggable="true" ondragstart="koDrag(event,'${code}')" ${dz}>${flagImg(code)} <span>${siglaPT(code)}</span></div>`;
   }
   return `<div class="ko-slot empty" ${dz}><span class="undecided">arraste aqui</span></div>`;
 }
