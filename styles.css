@@ -394,6 +394,13 @@ table.standings .tname { font-weight: 600; }
 .ko-slot { display: flex; align-items: center; gap: 5px; padding: 6px 6px; font-size: 11px; font-weight: 700; min-height: 30px; border-bottom: 1px solid #ffffff0d; }
 .ko-slot:last-child { border-bottom: none; }
 .ko-slot img.flag { height: 16px; border-radius: 3px; }
+.ko-slot .qual-ok, .ko-slot .qual-warn {
+  margin-left: auto; flex-shrink: 0; width: 15px; height: 15px; line-height: 15px; text-align: center;
+  border-radius: 50%; font-size: 10px; font-weight: 800;
+}
+.ko-slot .qual-ok { background: #1faa4e; color: #fff; }
+.ko-slot .qual-warn { background: var(--brand-accent); color: #3a2a00; }
+.side.right .ko-slot .qual-ok, .side.right .ko-slot .qual-warn { margin-left: 0; margin-right: auto; }
 .ko-slot.filled { cursor: grab; }
 .ko-slot.filled:active { cursor: grabbing; }
 .ko-slot.filled:hover { background: #2bb56714; }

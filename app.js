@@ -706,11 +706,43 @@ function autoFill() {
   saveState(); renderKnockout();
 }
 
-/* célula de origem (32 avos): só arrastável */
+/* Times com classificação (top-2 do grupo) MATEMATICAMENTE garantida
+   considerando SÓ os resultados reais já jogados (ignora simulações).
+   Força bruta dos jogos restantes; empate conta contra o time (nunca confirma à toa). */
+function confirmedQualified(group) {
+  const teams = teamsOf(group).map(t => t.code);
+  const base = {}; teams.forEach(c => base[c] = 0);
+  for (const f of ALL_FIXTURES.filter(f => f.group === group && f.played)) {
+    if (f.hs > f.as) base[f.home] += 3;
+    else if (f.hs < f.as) base[f.away] += 3;
+    else { base[f.home] += 1; base[f.away] += 1; }
+  }
+  const rem = ALL_FIXTURES.filter(f => f.group === group && !f.played);
+  const safe = new Set(teams);
+  const total = Math.pow(3, rem.length);
+  for (let mask = 0; mask < total; mask++) {
+    const pts = { ...base }; let m = mask;
+    for (let i = 0; i < rem.length; i++) {
+      const o = m % 3; m = Math.floor(m / 3); const g = rem[i];
+      if (o === 0) pts[g.home] += 3; else if (o === 1) pts[g.away] += 3;
+      else { pts[g.home] += 1; pts[g.away] += 1; }
+    }
+    for (const c of [...safe]) {
+      let geq = 0; for (const d of teams) if (d !== c && pts[d] >= pts[c]) geq++;
+      if (geq > 1) safe.delete(c);
+    }
+  }
+  return safe;
+}
+let koConfirmed = new Set();
+
+/* célula de origem (32 avos): só arrastável. ✓ = classificação confirmada nos grupos; ! = projeção */
 function koCellSrc(code) {
   if (!code) return `<div class="ko-slot empty"><span class="undecided">—</span></div>`;
-  const t = TEAM_BY_CODE[code];
-  return `<div class="ko-slot filled" draggable="true" ondragstart="koDrag(event,'${code}')">${flagImg(code)} <span>${siglaPT(code)}</span></div>`;
+  const badge = koConfirmed.has(code)
+    ? `<span class="qual-ok" title="Classificação confirmada">✓</span>`
+    : `<span class="qual-warn" title="Projeção — ainda não confirmada">!</span>`;
+  return `<div class="ko-slot filled" draggable="true" ondragstart="koDrag(event,'${code}')">${flagImg(code)} <span>${siglaPT(code)}</span>${badge}</div>`;
 }
 /* célula das fases seguintes: arrastável (se preenchida) e alvo de drop */
 function koCellSlot(m, idx) {
@@ -755,6 +787,8 @@ const BRACKET_RIGHT = { R32: [76, 78, 79, 80, 86, 88, 85, 87], R16: [91, 92, 95,
 function renderKnockout() {
   const r32 = systemR32();
   validateBracket(r32);
+  koConfirmed = new Set();
+  GROUPS.forEach(g => confirmedQualified(g).forEach(c => koConfirmed.add(c)));
   const champ = userBracket.champion;
 
   const left =
