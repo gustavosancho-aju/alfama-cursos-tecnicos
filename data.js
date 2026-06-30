@@ -352,3 +352,36 @@ const RESULTS = [
   { home: "ALG", away: "AUT", hs: 3, as: 3 },
   { home: "JOR", away: "ARG", hs: 1, as: 3 },
 ];
+
+/* ============================================================
+   MATA-MATA REAL (resultados oficiais).
+   Cada fase é uma lista de confrontos em ORDEM DE CHAVE:
+   pares consecutivos (0&1, 2&3, ...) alimentam o jogo da fase seguinte.
+   { a, b, as, bs, pen } — as/bs = placar no tempo normal/prorrogação;
+   pen = código do vencedor nos pênaltis (use só em empate).
+   Fases ainda não jogadas: deixe [] (o app deduz quem avança). ============ */
+const KO = {
+  /* Ordem = chave oficial. Pares consecutivos alimentam cada oitava.
+     Lado A (esq.): índices 0–7. Lado B do Brasil (dir.): índices 8–15. */
+  R32: [
+    // --- Lado A ---
+    { a: "GER", b: "PAR", as: 1, bs: 1, pen: "PAR" }, // 0
+    { a: "FRA", b: "SWE" },                            // 1
+    { a: "CAN", b: "RSA", as: 1, bs: 0 },              // 2
+    { a: "NED", b: "MAR", as: 1, bs: 1, pen: "MAR" }, // 3
+    { a: "POR", b: "CRO" },                            // 4
+    { a: "ESP", b: "AUT" },                            // 5
+    { a: "USA", b: "BIH" },                            // 6
+    { a: "BEL", b: "SEN" },                            // 7
+    // --- Lado B (Brasil) ---
+    { a: "BRA", b: "JPN", as: 2, bs: 1 },              // 8
+    { a: "CIV", b: "NOR" },                            // 9
+    { a: "MEX", b: "ECU" },                            // 10
+    { a: "ENG", b: "COD" },                            // 11
+    { a: "ARG", b: "CPV" },                            // 12
+    { a: "AUS", b: "EGY" },                            // 13
+    { a: "SUI", b: "ALG" },                            // 14
+    { a: "COL", b: "GHA" },                            // 15
+  ],
+  R16: [], QF: [], SF: [], FINAL: [],
+};

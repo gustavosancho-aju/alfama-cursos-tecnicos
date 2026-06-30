@@ -401,6 +401,13 @@ table.standings .tname { font-weight: 600; }
 .ko-slot .qual-ok { background: #1faa4e; color: #fff; }
 .ko-slot .qual-warn { background: var(--brand-accent); color: #3a2a00; }
 .side.right .ko-slot .qual-ok, .side.right .ko-slot .qual-warn { margin-left: 0; margin-right: auto; }
+/* placar e vencedor no mata-mata real */
+.ko-slot .ko-score { margin-left: auto; flex-shrink: 0; font-weight: 800; font-size: 12px; min-width: 14px; text-align: center; color: var(--brand); }
+.side.right .ko-slot .ko-score { margin-left: 0; margin-right: auto; }
+.ko-slot.ko-win { background: #1faa4e1f; }
+.ko-slot.ko-win > span:nth-of-type(1) { color: #1faa4e; font-weight: 800; }
+.ko-slot.ko-win .ko-score { color: #1faa4e; }
+.ko-slot .ko-pen { font-size: 8px; font-weight: 800; background: var(--brand-accent); color: #3a2a00; border-radius: 4px; padding: 1px 3px; margin-left: 4px; }
 .ko-slot.filled { cursor: grab; }
 .ko-slot.filled:active { cursor: grabbing; }
 .ko-slot.filled:hover { background: #2bb56714; }

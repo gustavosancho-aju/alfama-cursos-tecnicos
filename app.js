@@ -792,42 +792,60 @@ function koRound(title, dateLbl, matchNums, { finalCol = false, isR32 = false, r
 const BRACKET_LEFT  = { R32: [74, 77, 73, 75, 83, 84, 81, 82], R16: [89, 90, 93, 94], QF: [97, 98], SF: [101] };
 const BRACKET_RIGHT = { R32: [76, 78, 79, 80, 86, 88, 85, 87], R16: [91, 92, 95, 96], QF: [99, 100], SF: [102] };
 
+/* ---- Mata-mata REAL (a partir do objeto KO em data.js) ---- */
+function koWinner(m) {
+  if (!m || !m.a || !m.b || m.as == null || m.bs == null) return null;
+  if (m.as > m.bs) return m.a;
+  if (m.bs > m.as) return m.b;
+  return m.pen || null;
+}
+/* deriva a fase seguinte a partir dos vencedores da anterior + resultados explícitos */
+function koDeriveRound(prev, explicit) {
+  const next = [];
+  for (let i = 0; i < prev.length / 2; i++) {
+    const wa = koWinner(prev[i * 2]), wb = koWinner(prev[i * 2 + 1]);
+    const ex = (explicit && explicit[i]) || {};
+    next.push({ a: ex.a || wa, b: ex.b || wb, as: ex.as, bs: ex.bs, pen: ex.pen });
+  }
+  return next;
+}
+function koTeamRow(code, score, win, pen) {
+  if (!code) return `<div class="ko-slot empty"><span class="undecided">—</span></div>`;
+  return `<div class="ko-slot filled ${win ? "ko-win" : ""}">${flagImg(code)} <span>${siglaPT(code)}</span>${pen ? `<span class="ko-pen" title="venceu nos pênaltis">pen</span>` : ""}<span class="ko-score">${score != null ? score : ""}</span></div>`;
+}
+function koRowsHTML(m) {
+  const w = koWinner(m);
+  return koTeamRow(m && m.a, m && m.as, w && w === m.a, m && m.pen && w === m.a) +
+         koTeamRow(m && m.b, m && m.bs, w && w === m.b, m && m.pen && w === m.b);
+}
+function koMatchHTML(m) { return `<div class="match"><div class="ko-match game">${koRowsHTML(m)}</div></div>`; }
+function koColumn(title, dateLbl, matches) {
+  return `<div class="round"><div class="round-title"><b>${title}</b><span>${dateLbl}</span></div>
+    <div class="matches">${matches.map(koMatchHTML).join("")}</div></div>`;
+}
+
 function renderKnockout() {
-  const r32 = systemR32();
-  validateBracket(r32);
-  koConfirmed = new Set();
-  GROUPS.forEach(g => confirmedQualified(g).forEach(c => koConfirmed.add(c)));
-  const champ = userBracket.champion;
+  const R32 = KO.R32;
+  const R16 = koDeriveRound(R32, KO.R16);
+  const QF  = koDeriveRound(R16, KO.QF);
+  const SF  = koDeriveRound(QF, KO.SF);
+  const FN  = koDeriveRound(SF, KO.FINAL);
+  const champ = koWinner(FN[0]);
+  const half = a => [a.slice(0, a.length / 2), a.slice(a.length / 2)];
+  const [r32L, r32R] = half(R32), [r16L, r16R] = half(R16), [qfL, qfR] = half(QF), [sfL, sfR] = half(SF);
 
-  const left =
-    koRound("32 avos", "28/6–3/7", BRACKET_LEFT.R32, { isR32: true, r32 }) +
-    koRound("Oitavas", "4–7/7", BRACKET_LEFT.R16) +
-    koRound("Quartas", "9–11/7", BRACKET_LEFT.QF) +
-    koRound("Semi", "14/7", BRACKET_LEFT.SF);
-  const right =
-    koRound("Semi", "15/7", BRACKET_RIGHT.SF) +
-    koRound("Quartas", "9–11/7", BRACKET_RIGHT.QF) +
-    koRound("Oitavas", "4–7/7", BRACKET_RIGHT.R16) +
-    koRound("32 avos", "28/6–3/7", BRACKET_RIGHT.R32, { isR32: true, r32 });
-
-  const finalCells = koCellSlot(104, 0) + koCellSlot(104, 1);
+  const left = koColumn("32 avos", "28/6–3/7", r32L) + koColumn("Oitavas", "4–7/7", r16L) + koColumn("Quartas", "9–11/7", qfL) + koColumn("Semi", "14/7", sfL);
+  const right = koColumn("Semi", "15/7", sfR) + koColumn("Quartas", "9–11/7", qfR) + koColumn("Oitavas", "4–7/7", r16R) + koColumn("32 avos", "28/6–3/7", r32R);
 
   let html = `<h2 class="section-title">Mata-mata</h2>
-    <p class="sim-note">Os <b>32 avos</b> vêm do sistema (classificados provisórios). Daí em diante, <b>arraste a seleção</b>
-    vencedora de cada confronto para a vaga seguinte, até o campeão no centro. 🖱️</p>
-    <div class="ko-tools">
-      <button class="ghost" onclick="autoFill()">⚡ preencher pelo favorito</button>
-      <button class="ghost" onclick="resetBracket()">↺ recomeçar</button>
-    </div>
+    <p class="sim-note">Chaveamento <b>real</b> da Copa. Em verde, quem avançou; jogos ainda não disputados aparecem como "—". Atualiza conforme os resultados.</p>
     <div class="panel"><div class="bracket two-sided">
       <div class="side left">${left}</div>
       <div class="center">
         <div class="round-title"><b>Final</b><span>19/7</span></div>
-        <div class="ko-match game ko-final">${finalCells}</div>
+        <div class="ko-match game ko-final">${koRowsHTML(FN[0])}</div>
         <div class="ko-trophy">🏆</div>
-        <div class="champion-drop" ondragover="koAllow(event)" ondragenter="this.classList.add('dragover')" ondragleave="this.classList.remove('dragover')" ondrop="this.classList.remove('dragover');koDrop(event,'champion')">
-          ${champ ? `<div class="name">${flagImg(champ, 26)} ${TEAM_BY_CODE[champ].name}</div>` : `<span class="undecided">campeão</span>`}
-        </div>
+        <div class="champion-drop">${champ ? `<div class="name">${flagImg(champ, 26)} ${TEAM_BY_CODE[champ].name}</div>` : `<span class="undecided">campeão</span>`}</div>
       </div>
       <div class="side right">${right}</div>
     </div></div>`;
