@@ -18,7 +18,7 @@ const TOURNAMENT = {
   hosts: "Estados Unidos · México · Canadá",
   start: "2026-06-11",
   end: "2026-07-19",
-  lastUpdate: "2026-06-25",
+  lastUpdate: "2026-06-30",
 };
 
 /* rating ≈ pontos do Ranking FIFA (jun/2026) */
@@ -336,4 +336,19 @@ const RESULTS = [
   { home: "CUW", away: "CIV", hs: 0, as: 2 },
   { home: "JPN", away: "SWE", hs: 1, as: 1 },
   { home: "TUN", away: "NED", hs: 1, as: 3 },
+  // ---- Rodada 3 (cont.) 25-27/06 ----
+  { home: "TUR", away: "USA", hs: 3, as: 2 },
+  { home: "PAR", away: "AUS", hs: 0, as: 0 },
+  { home: "NOR", away: "FRA", hs: 1, as: 4 },
+  { home: "SEN", away: "IRQ", hs: 5, as: 0 },
+  { home: "CPV", away: "KSA", hs: 0, as: 0 },
+  { home: "URU", away: "ESP", hs: 0, as: 1 },
+  { home: "EGY", away: "IRN", hs: 1, as: 1 },
+  { home: "NZL", away: "BEL", hs: 1, as: 5 },
+  { home: "PAN", away: "ENG", hs: 0, as: 2 },
+  { home: "CRO", away: "GHA", hs: 2, as: 1 },
+  { home: "COL", away: "POR", hs: 0, as: 0 },
+  { home: "COD", away: "UZB", hs: 3, as: 1 },
+  { home: "ALG", away: "AUT", hs: 3, as: 3 },
+  { home: "JOR", away: "ARG", hs: 1, as: 3 },
 ];
