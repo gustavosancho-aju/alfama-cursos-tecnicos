@@ -18,7 +18,7 @@ const TOURNAMENT = {
   hosts: "Estados Unidos · México · Canadá",
   start: "2026-06-11",
   end: "2026-07-19",
-  lastUpdate: "2026-06-30",
+  lastUpdate: "2026-07-01",
 };
 
 /* rating ≈ pontos do Ranking FIFA (jun/2026) */
@@ -312,7 +312,7 @@ const KO = {
   R32: [
     // --- Lado A ---
     { a: "GER", b: "PAR", as: 1, bs: 1, pen: "PAR" }, // 0
-    { a: "FRA", b: "SWE" },                            // 1
+    { a: "FRA", b: "SWE", as: 3, bs: 0 },              // 1
     { a: "CAN", b: "RSA", as: 1, bs: 0 },              // 2
     { a: "NED", b: "MAR", as: 1, bs: 1, pen: "MAR" }, // 3
     { a: "POR", b: "CRO" },                            // 4
@@ -321,8 +321,8 @@ const KO = {
     { a: "BEL", b: "SEN" },                            // 7
     // --- Lado B (Brasil) ---
     { a: "BRA", b: "JPN", as: 2, bs: 1 },              // 8
-    { a: "CIV", b: "NOR" },                            // 9
-    { a: "MEX", b: "ECU" },                            // 10
+    { a: "CIV", b: "NOR", as: 1, bs: 2 },              // 9
+    { a: "MEX", b: "ECU", as: 2, bs: 0 },              // 10
     { a: "ENG", b: "COD" },                            // 11
     { a: "ARG", b: "CPV" },                            // 12
     { a: "AUS", b: "EGY" },                            // 13
